@@ -1,0 +1,35 @@
+
+<style>
+    p, a {
+        font-family: DM Sans;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18.23px;
+        text-align: left;
+        color: #FFFFFF;
+    }
+</style>
+
+<style>
+    footer {
+        background: #22244E;
+        width: 100%;
+    }
+</style>
+
+<footer class="grid grid-cols-1 lg:grid-cols-2 items-center px-12 h-[138px] lg:h-[90px]">
+    <div class="flex items-center justify-center lg:justify-start gap-24 w-full">
+        <img class="" src="/assets/svgs/logo.svg" alt="" srcset="">
+        <p class="hidden lg:block">Si requieres acompañamiento o tienes alguna duda, contáctanos.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center lg:justify-items-end w-full gap-3 lg:gap-0">
+        <div class="flex items-center">
+            <img src="/assets/svgs/telefono.svg" alt="Phone Icon">
+            <a href="tel:+6014292636" class="ml-3 hover:underline">(601) 4292636</a>
+        </div>
+        <div class="flex items-center">
+            <img src="/assets/svgs/correo.svg" alt="Email Icon">
+            <a [href]="'mailto:' + emailAddress" class="ml-3 hover:underline">{{ emailAddress }}</a>
+        </div>
+    </div>
+</footer>
