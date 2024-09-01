@@ -1,39 +1,11 @@
-<style>
-    button {
-        width: 138px;
-        height:41px;
-        padding: 10px 40px 10px 40px;
-        gap: 10px;
-        border-radius: 20px;
-        background: #00DEC1;
-    }
-
-    .modal {
-        width: 678px;
-        height: 632px;
-        border-radius: 10px;
-        padding: 100px 54.5px;
-    }
-
-    .title {
-        font-family: Switzer;
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 26.4px;
-        text-align: center;
-        color: #2C2D56;
-    }
-</style>
-
-
 <div class="fixed inset-0 bg-slate-950 bg-opacity-75 flex justify-center items-center z-50" *ngIf="isOpen">
-    <div class="modal bg-white p-5 rounded shadow-lg">
-      <h2 class="title mb-10">{{ title }}</h2>
-      <div class="mb-4">
-        <ng-content></ng-content>
-      </div>
-      <div class="flex justify-center space-x-2">
-        <button (click)="confirm()" class="bg-blue-500 text-white px-4 py-2 rounded mt-10">Aceptar</button>
-      </div>
+  <div class="modal bg-white p-5 rounded shadow-lg max-w-full max-h-full overflow-y-auto">
+    <h2 class="title mb-10">{{ title }}</h2>
+    <div class="mb-4">
+      <ng-content></ng-content>
     </div>
+    <div class="flex justify-center space-x-2">
+      <button (click)="confirm()" class="text-white px-4 py-2 rounded mt-10">Aceptar</button>
+    </div>
+  </div>
 </div>

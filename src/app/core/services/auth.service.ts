@@ -47,7 +47,7 @@ export class AuthService {
    * @param password - La contraseña para la autenticación.
    * @returns Observable<any> - Un observable que emite la respuesta de autenticación.
    */
-  login(username: string, password: string): Observable<AuthResponse> {
+  login(username: string, password: string): Observable<any> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { username, password }).pipe(
       tap(response => {
         // Almacena el token en localStorage y actualiza el Subject.

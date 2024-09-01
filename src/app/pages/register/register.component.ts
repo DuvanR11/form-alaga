@@ -6,29 +6,38 @@ import { AlertComponent } from '../../shared/components/alert/alert.component';
 import { MESSAGE_MODAL, MESSAGES_COMPANY } from '../../core/utilities/constant';
 import { Empresa } from '../../core/models/empresa.model';
 import { EmpresaService } from '../../core/services/empresa.service';
-import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ModalComponent, ReactiveFormsModule, CommonModule, AlertComponent, HttpClientModule ],
+  imports: [ModalComponent, ReactiveFormsModule, CommonModule, AlertComponent ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
 
-  isTermsChecked = false;
-  isDataChecked = false;
-  isTermsModalOpen = false;
-  isDataModalOpen = false;
+  isTermsChecked: boolean = false;
+  isDataChecked: boolean = false;
+  isTermsModalOpen: boolean = false;
+  isDataModalOpen: boolean = false;
 
-  message = MESSAGE_MODAL
+  message: string = MESSAGE_MODAL
   
   alertMessage: string | null = null;
+  isAlertVisible: boolean = true;
+
   alertType: 'success' | 'error' | 'info' = 'info';
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private empresaService: EmpresaService) {
+  passwordFieldType: string = 'password'
+  confirmPasswordFieldType: string = 'password';
+
+  constructor(
+      private fb: FormBuilder, 
+      private empresaService: EmpresaService,
+      private router: Router
+    ) {
     this.registerForm = this.fb.group({
       nit: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       email: ['', [Validators.required, Validators.email]],
@@ -45,7 +54,15 @@ export class RegisterComponent {
       ? null : { mismatch: true };
   }
 
+  // Método para alternar la visibilidad de la contraseña
+  togglePasswordVisibility(): void {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
 
+  // Método para alternar la visibilidad de la contraseña de confirmación
+  toggleConfirmPasswordVisibility(): void {
+    this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
+  }
 
   isFormInvalid(): boolean {
     return this.registerForm.invalid || this.registerForm.hasError('mismatch');
@@ -53,21 +70,29 @@ export class RegisterComponent {
   
   onSubmit(): void {
     if (this.registerForm.valid) {
-      if (this.registerForm.value.terms && this.registerForm.value.data) {
-        const empresa: Empresa = this.registerForm.value;
 
-        // this.empresaService.registerEmpresa(empresa).subscribe(
-        //   response => {
-        //     this.alertMessage = MESSAGES_COMPANY.SUCCESS.REGISTERED;
-        //     this.alertType = 'success';
-        //     console.log('Form Submitted', response);
-        //   },
-        //   error => {
-        //     this.alertMessage = MESSAGES_COMPANY.ERROR.REGISTRATION_FAILED;
-        //     this.alertType = 'error';
-        //     console.error('Error:', error);
-        //   }
-        // );
+      if (this.registerForm.value.terms && this.registerForm.value.data) {
+
+        const empresa: Empresa = this.registerForm.value;
+        // TODO: CON FINES DE PRUEBA SE ALMACENA LA DATA PARA SEGUIR CON EL FLUJO
+        // AL MONTAR UN BACKEND ESTE PROCESO DEBE OMITIRSE PARA CUMPLIR EL OBJETIVO DEL MODULO
+        localStorage.setItem('empresa', JSON.stringify(empresa));
+
+        this.empresaService.registerEmpresa(empresa).subscribe(
+          response => {
+            this.alertMessage = MESSAGES_COMPANY.SUCCESS.REGISTERED;
+            this.alertType = 'success';
+            this.router.navigate(['/home']);
+            console.log('Data generada: ', response);
+          },
+          error => {
+            this.alertMessage = MESSAGES_COMPANY.ERROR.REGISTRATION_FAILED;
+            // TODO: POR FINES DE PRUEBA YA QUE AL NO TENER UN BACK GENERA ERROR
+            // LO REDIRECCIONARE AL HOME CON LA DATA ALMACENADA
+            this.router.navigate(['/home']); 
+            this.alertType = 'error';
+          }
+        );
       } else {
         this.alertMessage = MESSAGES_COMPANY.ERROR.TERMS_REQUIRED;
         this.alertType = 'error';
@@ -75,10 +100,8 @@ export class RegisterComponent {
     } else {
       this.alertMessage = MESSAGES_COMPANY.ERROR.FORM_INVALID;
       this.alertType = 'error';
-      console.log('Form is not valid');
     }
   }
-  
 
   openTermsModal() {
     this.isTermsModalOpen = true;
@@ -90,36 +113,34 @@ export class RegisterComponent {
 
   onTermsChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    if (target) {
-      const checked = target.checked;
-      if (!checked) {
-        this.isTermsChecked = true;
-      } else {
-        this.openTermsModal();
-      }
+    if (target.checked) {
+      this.openTermsModal();
+    } else {
+      this.registerForm.patchValue({ terms: false });
     }
   }
 
   onDataChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    if (target) {
-      const checked = target.checked;
-      if (!checked) {
-        this.isDataChecked = true;
-      } else {
-        this.openDataModal();
-      }
+    if (target.checked) {
+      this.openDataModal();
+    } else {
+      this.registerForm.patchValue({ data: false });
     }
   }
-  
 
   acceptTerms() {
-    this.isTermsChecked = true;
+    this.registerForm.patchValue({ terms: true });
+    this.isTermsModalOpen = false;
   }
 
   acceptData() {
-    this.isDataChecked = true;
+    this.registerForm.patchValue({ data: true });
+    this.isDataModalOpen = false;
   }
 
-
+  handleCloseAlert() {
+    this.alertMessage = '';
+    this.isAlertVisible = false;
+  }
 }

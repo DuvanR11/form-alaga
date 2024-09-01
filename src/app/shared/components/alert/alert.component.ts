@@ -14,6 +14,7 @@ export class AlertComponent {
   @Output() close = new EventEmitter<void>();
 
   closeAlert() {
+    this.message = ''
     this.close.emit();
   }
 }

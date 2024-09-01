@@ -7,7 +7,7 @@ export const MESSAGES_COMPANY = {
     },
     ERROR: {
       FORM_INVALID: 'El formulario no es válido. Por favor, corrige los errores.',
-      TERMS_REQUIRED: 'Debes aceptar los términos y condiciones y el tratamiento de datos.',
+      TERMS_REQUIRED: 'Debes llenar todos los campos. Aceptar tratamiento de datos y términos y condiciones de la plataforma.',
       REGISTRATION_FAILED: 'Ocurrió un error al registrar la empresa.'
     }
 };

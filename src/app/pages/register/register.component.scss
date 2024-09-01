@@ -1,0 +1,54 @@
+.box-radio {
+    background: #2C2D56;
+    border-radius: 10px;
+    width: 502px;
+    height: 87px;
+}
+
+.title-rigth-box {
+    font-size: 40px;
+    font-weight: 700;
+    color: #FFFCEA;
+}
+
+.subtitle-rigth-box  {
+    font-size: 38.49px;
+    font-weight: 300;
+    color: #FFFCEA;
+}
+
+.body-title-rigth-box {
+    font-size: 14.72px;
+    font-weight: 400;
+    line-height: 19.43px;
+    color: #FFFCEA; 
+}
+
+.body2-title-rigth-box {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18.48px;
+    color: #FFFCEA;
+}
+
+.body2-title-rigth-box.active {
+    color: #00D8BB;
+}
+
+.submit {
+    width: 181px;
+    height: 41px;
+    padding: 10px 60px 10px 60px;
+    gap: 10px;
+    border-radius: 20px;
+    color: #000000;
+}
+
+.valid-button {
+    background: #00DEC1;
+}
+
+.disabled-button {
+    color: #A8A8A8;
+    background: #ECECEC;
+}

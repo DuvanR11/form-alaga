@@ -1,1 +1,13 @@
-<p>home works!</p>
+<section class="h-screen flex items-center justify-items-center justify-center">
+    <div class="bg-gray-100  p-10 rounded-md shadow-md" style="width: 550px;">
+        <h1 class="text-center">Datos registrados de la empresa</h1>
+        <br>
+        <pre class="text-gray-800">
+          <code [innerHTML]="jsonData"></code>
+        </pre>
+        <br>
+        <div class="flex justify-center">
+            <button (click)="goBackToRegister()">Volver al formulario</button>
+        </div>
+    </div>
+</section>

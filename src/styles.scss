@@ -3,6 +3,80 @@
 @import "tailwindcss/utilities";
 
 
+// TEXT CUSTOM
+
+body, h1, h2, p, span, label, button {
+    font-family: Switzer, sans-serif;;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 31.68px;
+    color: #2F2727;
+}
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 21.12px;
+    color: #2F2727;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18.48px;
+    color: #6E6D6D;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.48px;
+    color: #000000;
+}
+
+.text-modal {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15.84px;
+    color: #2C2D56;
+}
+
+// COLORS CUSTOM
+.bg-primary {
+    background: #2C2D56;
+}
+
+.bg-secondary {
+    background: #4865EF;
+}
+
+// FORM CUSTOM
+
+input[type=text], 
+input[type=email],
+input[type=password] {
+    height: 37px;
+    border-radius: 8px;
+    background: #F2F2F2;
+    margin-top: 8px;
+    padding: 0 10px;
+}
+
+input[type=text]:focus, 
+input[type=email]:focus, 
+input[type=password]:focus {
+    border: 1px solid #4865EF;
+    outline: none; 
+    transition: border-color 0.3s ease; 
+}
+
+form {
+    padding: 52.5px 0;
+}
+
 .custom-checkbox {
     appearance: none;
     width: 18px;
@@ -31,4 +105,8 @@
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+}
+
+.invalid-input {
+    border: 1px solid #FF7362
 }

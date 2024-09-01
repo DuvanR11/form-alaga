@@ -1,136 +1,11 @@
-
-
-<style>
-    .h1 {
-        font-family: Switzer;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 31.68px;
-        text-align: left;
-        color: #2F2727;
-
-    }
-
-    .p1 {
-        font-family: Switzer;
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 21.12px;
-        color: #2F2727;
-    }
-
-    label {
-        font-family: Switzer;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 18.48px;
-        text-align: left;
-        color: #6E6D6D;
-    }
-
-
-    .custom-input {
-        height: 37px;
-        border-radius: 8px;
-        border: 1px solid #d1d5db;
-        background: #F2F2F2;
-        margin-top: 8px;
-    }
-
-    .pd {
-        padding: 0 12px;
-    }
-
-    button {
-        width: 181px;
-        height: 41px;
-        padding: 10px 60px 10px 60px;
-        gap: 10px;
-        border-radius: 20px;
-        color: #000000;
-    }
-
-
-    form {
-        padding: 52.5px 0;
-    }
-
-    /* Lado izquierdo formulario*/
-    .ld2 {
-        height: 864px;
-        background: #4865EF;
-        padding: 52.5px 0;
-    }
-
-    .box1 {
-        background: #2C2D56;
-        border-radius: 10px;
-        width: 502px;
-        height: 87px;
-    }
-
-    .box1-p1 {
-        font-family: Switzer;
-        font-size: 40px;
-        font-weight: 700;
-        color: #FFFCEA;
-    }
-
-    .box1-p2 {
-        font-family: Switzer;
-        font-size: 38.49px;
-        font-weight: 300;
-        color: #FFFCEA;
-    }
-
-    .box1-p3 {
-        font-family: Switzer;
-        font-size: 14.72px;
-        font-weight: 400;
-        line-height: 19.43px;
-        color: #FFFCEA;
-    }
-
-    .box-p4 {
-        font-family: Switzer;
-        font-size: 14px;
-        font-weight: 300;
-        line-height: 18.48px;
-        text-align: left;
-        color: #FFFCEA;
-    }
-
-    .box-p4.active {
-        color: #00D8BB;
-    }
-
-    .box-label {
-        font-family: Switzer;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 18.48px;
-        text-align: left;
-        color: #000000;
-    }
-
-    .text-modal {
-        font-family: Switzer;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 15.84px;
-        text-align: left;
-        color: #2C2D56;
-    }
-</style>
-
 <section class="grid grid-cols-1 lg:grid-cols-2 justify-center" >
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="grid grid-rows-8 justify-items-center w-full">
 
         <div class="w-[336px] lg:w-[558px]">
-            <h1 class="h1">¡Regístrate</h1>
-            <p class="p1">Da el primer paso y solicita un crédito para tu Mipyme.</p>
-            <p class="p1">Diligencia los siguientes campos:</p>
+            <h1 class="mb-2">¡Regístrate!</h1>
+            <p class="subtitle">Da el primer paso y solicita un crédito para tu Mipyme.</p>
+            <p class="subtitle">Diligencia los siguientes campos:</p>
         </div>
 
         <div class="flex flex-col">
@@ -143,10 +18,9 @@
             <input 
                 formControlName="nit" 
                 type="text" 
-                class="w-[336px] lg:w-[558px] custom-input"
+                class="w-[336px] lg:w-[558px]"
                 [ngClass]="{
-                    'border-red-500': registerForm.get('nit')?.invalid && registerForm.get('nit')?.touched,
-                    'border-gray-300': !registerForm.get('nit')?.invalid || !registerForm.get('nit')?.touched
+                    'invalid-input': registerForm.get('nit')?.invalid && registerForm.get('nit')?.touched
                 }"
             >
         </div>
@@ -158,7 +32,14 @@
                     <small class="text-red-500">*Por favor, ingresa un correo electrónico válido.</small>
                 </p>
             </div>
-            <input formControlName="email" type="email" class="w-[336px] lg:w-[558px] custom-input">
+            <input 
+                formControlName="email" 
+                type="email" 
+                class="w-[336px] lg:w-[558px]"
+                [ngClass]="{
+                    'invalid-input': registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+                }"
+            >
         </div>
 
         <div class="flex flex-col">
@@ -168,29 +49,76 @@
                     <small class="text-red-500">*Por favor, ingresa un número de celular válido.</small>
                 </p>
             </div>
-            <input formControlName="phone" type="text" class="w-[336px] lg:w-[558px] custom-input">
+            <input 
+                formControlName="phone" 
+                type="text" 
+                class="w-[336px] lg:w-[558px]"
+                [ngClass]="{
+                    'invalid-input': registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched
+                }"
+            >
         </div>
 
         <div class="flex flex-col">
             <div class="flex items-center justify-between">
-                <label for="password">Crea tu contraseña*</label>
-                <p *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-                    <small class="text-red-500">La contraseña debe tener al menos 8 caracteres.</small>
-                </p>
+              <label for="password">Crea tu contraseña*</label>
+              <p *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                <small class="text-red-500">La contraseña debe tener al menos 8 caracteres.</small>
+              </p>
             </div>
-            <input formControlName="password" type="password" class="w-[336px] lg:w-[558px] custom-input">
+            <div class="relative">
+                <input 
+                    formControlName="password" 
+                    [type]="passwordFieldType" 
+                    class="w-[336px] lg:w-[558px]"
+                    [ngClass]="{
+                    'invalid-input': registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+                    }"
+                >
+               <button 
+                    type="button" 
+                    (click)="togglePasswordVisibility()" 
+                    class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer"
+                    >
+                    <img 
+                        [src]="passwordFieldType === 'password' ? '/assets/svgs/view.svg' : '/assets/svgs/view-off.svg'"
+                        alt="Toggle visibility"
+                        class="w-6 h-6 mt-2"
+                    >
+                </button>
+            </div>
         </div>
-
+          
         <div class="flex flex-col">
-            <div class="flex items-center justify-between">
-                <label for="password">Repite tu contraseña*</label>
-                <p *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched">
-                    <small class="text-red-500">Las contraseñas no coinciden.</small>
-                </p>
-            </div>
-            <input formControlName="confirmPassword" type="password" class="w-[336px] lg:w-[558px] custom-input">
+        <div class="flex items-center justify-between">
+            <label for="confirmPassword">Repite tu contraseña*</label>
+            <p *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched">
+            <small class="text-red-500">Las contraseñas no coinciden.</small>
+            </p>
         </div>
-
+        <div class="relative">
+            <input 
+            formControlName="confirmPassword" 
+            [type]="confirmPasswordFieldType" 
+            class="w-[336px] lg:w-[558px] pr-12"
+            [ngClass]="{
+                'invalid-input': registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched
+            }"
+            >
+            <button 
+            type="button" 
+            (click)="toggleConfirmPasswordVisibility()" 
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer"
+            >
+            <img 
+                [src]="confirmPasswordFieldType === 'password' ? '/assets/svgs/view.svg' : '/assets/svgs/view-off.svg'"
+                alt="Toggle visibility"
+                class="w-6 h-6 mt-2"
+            >
+            </button>
+        </div>
+        </div>
+          
         <div class="flex flex-col space-y-5 w-[336px] lg:w-[558px]">
             <div class="flex items-center">
               <input 
@@ -200,7 +128,7 @@
                 [checked]="isTermsChecked"
                 (change)="onTermsChange($event)"
               >
-              <label for="terms" class="box-label ml-3">Autorización de los términos y condiciones de la plataforma</label>
+              <label for="terms" class="checkbox-label ml-3">Autorización de los términos y condiciones de la plataforma</label>
             </div>
             
             <div class="flex items-center">
@@ -211,26 +139,27 @@
                 [checked]="isDataChecked"
                 (change)="onDataChange($event)"
               >
-              <label for="data" class="box-label ml-3">Autorización de tratamiento de datos</label>
+              <label for="data" class="checkbox-label ml-3">Autorización de tratamiento de datos</label>
             </div>
-          </div>
+        </div>
 
         <div class="flex justify-center mt-3 relative">
             <app-alert
                 *ngIf="alertMessage"
                 [type]="alertType"
                 [message]="alertMessage"
-                (close)="alertMessage = ''">
+                (close)="handleCloseAlert()"
+            >
             </app-alert>
 
             <button 
                 type="submit" 
                 [disabled]="isFormInvalid()" 
                 [ngClass]="{
-                    'bg-blue-500': !isFormInvalid(),
-                    'bg-gray-500 cursor-not-allowed': isFormInvalid()
+                    'valid-button': !isFormInvalid(),
+                    'disabled-button cursor-not-allowed': isFormInvalid()
                 }"
-                class="relative z-10"
+                class="submit relative z-10"
             >
                 Ingresar
             </button>
@@ -238,21 +167,22 @@
 
     </form>
 
-    <div class="hidden lg:grid justify-items-center ld2 w-full">
+    <div class="hidden lg:grid justify-items-center min-h-[864px] bg-secondary w-full" style="padding: 52.5px 0;">
         <div>
             <img src="/assets/svgs/logo-xl.svg" alt="">
         </div>
         <div class="text-center">
-            <p class="box1-p1">Crédito para empresas</p>
-            <p class="box1-p2">¡Solicítalo hoy mismo!</p>
+            <p class="title-rigth-box">Crédito para empresas</p>
+            <p class="subtitle-rigth-box">¡Solicítalo hoy mismo!</p>
         </div>
 
-        <img src="/assets/svgs/maletin-xl.svg" alt="">
-        <p class="box1-p3">Si eres persona jurídica con más de 6 meses de constitución</p>
+        <div class="my-24">
+            <img src="/assets/svgs/maletin-xl.svg" alt="">
+        </div>
+        <p class="body-title-rigth-box">Si eres persona jurídica con más de 6 meses de constitución</p>
 
-        <div class="box1 grid grid-cols-2 gap-4 items-center justify-items-center">
-            <p class="box-p4 active">Solicitud y validación</p>
-            <p class="box-p4">Vinculación de empresa</p>
+        <div class="box-radio flex items-center justify-center">
+            <img src="/assets/svgs/steps.svg" alt="">
         </div>
     </div>
 </section>

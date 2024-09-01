@@ -21,7 +21,7 @@ Esta es una interfaz de usuario construida con Angular y tailwindcss que proporc
 
 ## Despliegue
 Este frontend está desplegado usando Vercel. Puedes acceder a la aplicación en la siguiente URL:
-[`Front alaga prueba`](https://github.com/DuvanR11/register-service). 
+[`Front alaga prueba`](registre.devduvan.tech). 
 
 ## Instalación
 

@@ -4,6 +4,7 @@ import { Observable, timer } from 'rxjs';
 import { catchError, retryWhen, delayWhen, scan } from 'rxjs/operators';
 import { ErrorHandlingService } from './error-handling.service';
 import { Empresa } from '../models/empresa.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { Empresa } from '../models/empresa.model';
  * Servicio para manejar operaciones relacionadas con empresas.
  */
 export class EmpresaService {
-  private apiUrl = 'https://your-api-endpoint.com/empresas';
+  private apiUrl = `${environment.apiUrl}/empresas`;
 
   /**
    * Crea una instancia de EmpresaService.
